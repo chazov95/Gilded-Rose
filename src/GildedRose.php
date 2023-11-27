@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
-use GildedRose\Items\Service\ItemService;
+use GildedRose\Items\ItemInterface;
 
 final class GildedRose
 {
     /**
-     * @param Item[] $items
+     * @param ItemInterface[] $items
      */
     public function __construct(
         private array $items
@@ -19,9 +19,7 @@ final class GildedRose
     public function updateQuality(): void
     {
         foreach ($this->items as $item) {
-            $itemService = new ItemService;
-            $product = $itemService->getProduct($item->name);
-            $product->updateQuality();
+            $item->updateQuality();
 
             if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if ($item->quality > 0) {

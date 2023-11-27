@@ -2,16 +2,12 @@
 
 namespace GildedRose\Items\Item;
 
+use GildedRose\Item;
 use GildedRose\Items\ItemInterface;
 
-class Sulfuras implements ItemInterface
+class Sulfuras extends Item implements ItemInterface
 {
-
-    public function __construct()
-    {
-    }
-
-    public function updateQuality()
+    public function updateQuality() :void
     {
         // TODO: Implement updateQuality() method.
     }

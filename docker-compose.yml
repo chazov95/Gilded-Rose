@@ -1,6 +1,7 @@
 version: '3'
 services:
   php:
-    image: php
-    ports:
-      - "90:90"
+    image: php:8.0-fpm-alpine3.15
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html

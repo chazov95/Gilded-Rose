@@ -5,15 +5,14 @@ namespace GildedRose\Items\Item;
 use GildedRose\Item;
 use GildedRose\Items\ItemInterface;
 
-class AgedBrie implements ItemInterface
+class AgedBrie extends Item implements ItemInterface
 {
-    /**
-     * @var $item Item
-     */
-    public Item $item;
-
-    public function updateQuality()
+    public function updateQuality() :void
     {
-        // TODO: Implement updateQuality() method.
+        $this->quality++;
+
+        if ($this->quality > 50) {
+            $this->quality = 50;
+        }
     }
 }

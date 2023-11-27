@@ -1,11 +1,10 @@
 <?php
 
-namespace GildedRose\Items\Item;
+namespace GildedRose\Items;
 
 use GildedRose\Item;
-use GildedRose\Items\ItemInterface;
 
-class BaseProduct extends Item implements ItemInterface
+class Conjured extends Item implements ItemInterface
 {
     public function updateQuality(): void
     {
