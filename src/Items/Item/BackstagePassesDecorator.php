@@ -14,7 +14,9 @@ class BackstagePassesDecorator extends BaseProduct
     public function updateQuality(): void
     {
         $this->sellIn--;
-        $this->quality++;
+        if ($this->sellIn > 10) {
+            $this->quality++;
+        }
         if ($this->sellIn < 10 && $this->sellIn > 5) {
             $this->quality += 2;
         }
