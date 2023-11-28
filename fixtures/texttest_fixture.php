@@ -5,11 +5,6 @@ declare(strict_types=1);
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use GildedRose\GildedRose;
-use GildedRose\Item;
-use GildedRose\Items\Item\AgedBrie;
-use GildedRose\Items\Item\BackstagePasses;
-use GildedRose\Items\Item\BaseProduct;
-use GildedRose\Items\Item\Sulfuras;
 use GildedRose\Items\ItemFactory;
 
 echo 'OMGHAI!' . PHP_EOL;
@@ -19,7 +14,7 @@ $itemsData = [
     ['name' => 'Aged Brie', 'sellIn' => 2, 'quality' => 0],
     ['name' => 'Elixir of the Mongoose', 'sellIn' => 5, 'quality' => 7],
     ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => 0, 'quality' => 80],
-    ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => 1, 'quality' => 80],
+    ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => -1, 'quality' => 80],
     ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 15, 'quality' => 20],
     ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 10, 'quality' => 49],
     ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 5, 'quality' => 49],

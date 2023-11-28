@@ -2,10 +2,9 @@
 
 namespace GildedRose\Items;
 
-use GildedRose\Items\Item\AgedBrie;
-use GildedRose\Items\Item\BackstagePasses;
+use GildedRose\Items\Item\BackstagePassesDecorator;
 use GildedRose\Items\Item\BaseProduct;
-use GildedRose\Items\Item\Sulfuras;
+use GildedRose\Items\Item\QualityDecorator;
 
 /**
  * Отвечает за создание конкретных продуктов
@@ -20,11 +19,11 @@ class ItemFactory
     public static function create(string $name, int $sellIn, int $quality): ItemInterface
     {
         return match ($name) {
-            self::AGED_BRIE => new AgedBrie($name, $sellIn, $quality),
-            self::SULFURAS => new Sulfuras($name, $sellIn, $quality),
-            self::BACKSTAGE_PASSES => new BackstagePasses($name, $sellIn, $quality),
-            self::CONJURED => new Conjured($name, $sellIn, $quality),
-            default => new BaseProduct($name, $sellIn, $quality)
+            self::AGED_BRIE => new QualityDecorator((new BaseProduct($name, $sellIn, $quality)), qualityChange: 1),
+            self::SULFURAS => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityLimit: 80, permanentSellIn: true),
+            self::BACKSTAGE_PASSES => new BackstagePassesDecorator(new BaseProduct($name, $sellIn, $quality)),
+            self::CONJURED => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -2),
+            default => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -1)
         };
     }
 }

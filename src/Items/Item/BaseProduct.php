@@ -9,6 +9,5 @@ class BaseProduct extends Item implements ItemInterface
 {
     public function updateQuality(): void
     {
-        // TODO: Implement updateQuality() method.
     }
 }
