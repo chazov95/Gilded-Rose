@@ -20,7 +20,7 @@ class PeriodicChangeQualityDecorator extends BaseProduct
         $item->sellIn--;
 
         foreach ($this->periodData as $periodDatum) {
-            if ($item->sellIn > $periodDatum['period']['min'] && $item->sellIn < $periodDatum['period']['max']) {
+            if ($item->sellIn >= $periodDatum['period']['min'] && $item->sellIn < $periodDatum['period']['max']) {
                 $item->quality += $periodDatum['qualityModificator'];
             }
 

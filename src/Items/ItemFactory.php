@@ -17,6 +17,14 @@ class ItemFactory
     const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     const CONJURED = "Conjured Mana Cake";
 
+    /**
+     * @param string $name
+     * @param int $sellIn
+     * @param int $quality
+     * @param array $settings
+     * @return ItemInterface
+     */
+    //TODO в реальном прокете настройки декораторов, и список необходимых декораторов будут приходить из базы
     public static function create(string $name, int $sellIn, int $quality, array $settings = []): ItemInterface
     {
 
@@ -32,7 +40,7 @@ class ItemFactory
 
             self::CONJURED => new LimitDecorator(new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -2)),
 
-            default => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -1)
+            default => new LimitDecorator(new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -1))
         };
     }
 }

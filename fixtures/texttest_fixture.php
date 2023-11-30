@@ -11,7 +11,7 @@ echo 'OMGHAI!' . PHP_EOL;
 
 $periodData = [
     ["period" => ['min' => 10, 'max' => INF], "qualityModificator" => 1],
-    ["period" => ['min' => 6, 'max' => 10], "qualityModificator" => 2],
+    ["period" => ['min' => 5, 'max' => 10], "qualityModificator" => 2],
     ["period" => ['min' => -INF, 'max' => 5], "qualityModificator" => 3]
 ];
 
