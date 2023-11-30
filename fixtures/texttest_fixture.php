@@ -9,21 +9,27 @@ use GildedRose\Items\ItemFactory;
 
 echo 'OMGHAI!' . PHP_EOL;
 
+$periodData = [
+    ["period" => ['min' => 10, 'max' => INF], "qualityModificator" => 1],
+    ["period" => ['min' => 6, 'max' => 10], "qualityModificator" => 2],
+    ["period" => ['min' => -INF, 'max' => 5], "qualityModificator" => 3]
+];
+
 $itemsData = [
-    ['name' => '+5 Dexterity Vest', 'sellIn' => 10, 'quality' => 20],
-    ['name' => 'Aged Brie', 'sellIn' => 2, 'quality' => 0],
-    ['name' => 'Elixir of the Mongoose', 'sellIn' => 5, 'quality' => 7],
-    ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => 0, 'quality' => 80],
-    ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => -1, 'quality' => 80],
-    ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 15, 'quality' => 20],
-    ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 10, 'quality' => 49],
-    ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 5, 'quality' => 49],
+    ['name' => '+5 Dexterity Vest', 'sellIn' => 10, 'quality' => 20, 'settings'=>[]],
+    ['name' => 'Aged Brie', 'sellIn' => 2, 'quality' => 0, 'settings'=>[]],
+    ['name' => 'Elixir of the Mongoose', 'sellIn' => 5, 'quality' => 7, 'settings'=>[]],
+    ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => 0, 'quality' => 80, 'settings'=>[]],
+    ['name' => 'Sulfuras, Hand of Ragnaros', 'sellIn' => -1, 'quality' => 80, 'settings'=>[]],
+    ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 15, 'quality' => 20, 'settings'=>$periodData],
+    ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 10, 'quality' => 49, 'settings'=>$periodData],
+    ['name' => 'Backstage passes to a TAFKAL80ETC concert', 'sellIn' => 5, 'quality' => 49, 'settings'=>$periodData],
     // this conjured item does not work properly yet
-    ['name' => 'Conjured Mana Cake', 'sellIn' => 3, 'quality' => 6],
+    ['name' => 'Conjured Mana Cake', 'sellIn' => 3, 'quality' => 6, 'settings'=>[]],
 ];
 $items = [];
 foreach ($itemsData as $data) {
-    $items[] = ItemFactory::create($data['name'], $data['sellIn'], $data['quality']);
+    $items[] = ItemFactory::create($data['name'], $data['sellIn'], $data['quality'], $data['settings']);
 }
 $app = new GildedRose($items);
 

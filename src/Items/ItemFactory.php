@@ -2,9 +2,10 @@
 
 namespace GildedRose\Items;
 
-use GildedRose\Items\Item\BackstagePassesDecorator;
+use GildedRose\Items\Decorators\LimitDecorator;
+use GildedRose\Items\Decorators\PeriodicChangeQualityDecorator;
+use GildedRose\Items\Decorators\QualityDecorator;
 use GildedRose\Items\Item\BaseProduct;
-use GildedRose\Items\Item\QualityDecorator;
 
 /**
  * Отвечает за создание конкретных продуктов
@@ -16,13 +17,21 @@ class ItemFactory
     const BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     const CONJURED = "Conjured Mana Cake";
 
-    public static function create(string $name, int $sellIn, int $quality): ItemInterface
+    public static function create(string $name, int $sellIn, int $quality, array $settings = []): ItemInterface
     {
+
         return match ($name) {
-            self::AGED_BRIE => new QualityDecorator((new BaseProduct($name, $sellIn, $quality)), qualityChange: 1),
-            self::SULFURAS => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityLimit: 80, permanentSellIn: true),
-            self::BACKSTAGE_PASSES => new BackstagePassesDecorator(new BaseProduct($name, $sellIn, $quality)),
-            self::CONJURED => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -2),
+            self::AGED_BRIE =>
+            new LimitDecorator(new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: 1)),
+
+            self::SULFURAS => new LimitDecorator(new QualityDecorator(
+                new BaseProduct($name, $sellIn, $quality), qualityChange: 0, sellInChange: 0),
+                limitQuality: 80),
+
+            self::BACKSTAGE_PASSES => new LimitDecorator(new PeriodicChangeQualityDecorator(new BaseProduct($name, $sellIn, $quality), periodData: $settings)),
+
+            self::CONJURED => new LimitDecorator(new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -2)),
+
             default => new QualityDecorator(new BaseProduct($name, $sellIn, $quality), qualityChange: -1)
         };
     }
